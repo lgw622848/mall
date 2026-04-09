@@ -33,6 +33,9 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <skipTests>true</skipTests>
+        <!-- 默认跳过 Docker 镜像构建，避免 Jenkins/本机无远程 Docker 时 package 失败；需要打镜像时加 -Ddocker.skip=false -->
+        <docker.skip>true</docker.skip>
+        <!-- 仅在 docker.skip=false 时生效；本机 Docker 可改为 unix:///var/run/docker.sock（Linux）或 tcp://127.0.0.1:2375 -->
         <docker.host>http://192.168.3.101:2375</docker.host>
         <docker.maven.plugin.version>0.43.3</docker.maven.plugin.version>
         <pagehelper-starter.version>2.1.0</pagehelper-starter.version>
@@ -220,7 +223,8 @@
                             </execution>
                         </executions>
                     <configuration>
-                        <!-- Docker 远程管理地址-->
+                        <skip>${docker.skip}</skip>
+                        <!-- Docker 守护进程地址，仅在 docker.skip=false 时使用 -->
                         <dockerHost>${docker.host}</dockerHost>
                         <images>
                             <image>
