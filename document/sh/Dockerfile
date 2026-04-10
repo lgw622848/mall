@@ -1,8 +1,8 @@
 # 在 B 机部署目录执行：docker build -t mall/mall-admin:1.0-SNAPSHOT .
 # 需与同目录下的 mall-admin-1.0-SNAPSHOT.jar 一起由 Jenkins 传到该目录
-FROM openjdk:17
+FROM tkdue63hmyvk42axmc.xuanyuan.run/library/eclipse-temurin:17-jre-jammy
 
-LABEL maintainer="macrozheng"
+LABEL maintainer="lgw"
 
 ENV TZ=Asia/Shanghai \
     SPRING_PROFILES_ACTIVE=prod
