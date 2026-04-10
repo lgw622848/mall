@@ -29,7 +29,10 @@ if [[ ! -f "${deploy_dir}/Dockerfile" ]]; then
   exit 1
 fi
 
-docker build -t "${image_name}" "${deploy_dir}"
+docker build \
+  --build-arg "JAR_FILE=${app_name}-${version}.jar" \
+  -t "${image_name}" \
+  "${deploy_dir}"
 echo '----docker build----'
 
 docker image prune -f >/dev/null 2>&1 || true
